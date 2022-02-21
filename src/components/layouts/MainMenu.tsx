@@ -25,6 +25,8 @@ const subRedditList = [
 
 const MainMenu: React.FC<{}> = () => {
   const [filterString, setFilterString] = useState<string>(query_strings[0])
+  const [subReddits, setSubReddits] = useState<string[]>(subRedditList)
+  console.log(subRedditList)
   return (
     <Box ml={2}>
       <Menu isLazy id="navbar-menu">
@@ -38,12 +40,31 @@ const MainMenu: React.FC<{}> = () => {
         <MenuList>
           <MenuGroup title="Filter">
             {query_strings.map((item) => (
-              <MenuSelectItem key={item}>{item}</MenuSelectItem>
+              <MenuSelectItem
+                key={item}
+                filterString={filterString}
+                onClickMenuItem={(filter) => setFilterString(filter)}
+              >
+                {item}
+              </MenuSelectItem>
             ))}
           </MenuGroup>
           <MenuGroup title="Subreddit">
             {subRedditList.map((item) => (
-              <MenuSelectItem key={item}>{item}</MenuSelectItem>
+              <MenuSelectItem
+                key={item}
+                subReddits={subReddits}
+                onClickMenuItem={(value) =>
+                  setSubReddits((prevState) => {
+                    if (!prevState.includes(value)) {
+                      return [...prevState, value]
+                    }
+                    return prevState.filter((x) => x !== value)
+                  })
+                }
+              >
+                {item}
+              </MenuSelectItem>
             ))}
           </MenuGroup>
         </MenuList>
