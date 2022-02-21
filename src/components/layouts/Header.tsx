@@ -5,11 +5,7 @@ import Navbar from "./Navbar"
 interface HeaderProps {}
 
 const Header: React.FC<HeaderProps> = () => {
-  return (
-    <Box>
-      <Navbar />
-    </Box>
-  )
+  return <Navbar />
 }
 
 export default Header

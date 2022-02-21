@@ -14,15 +14,15 @@ const MenuSelectItem: React.FC<MenuItemProps> = ({
   subReddits,
   onClickMenuItem,
 }) => {
-  const filter = children.toLowerCase()
+  const filter = filterString ? children.toLowerCase() : children
   let selected = false
   if (filterString) {
     selected = filterString === filter
   } else {
-    selected = subReddits?.includes(filter) as boolean
+    selected = subReddits?.includes(children) as boolean
   }
   return (
-    <MenuItem closeOnSelect={false} onClick={() => onClickMenuItem(filter)}>
+    <MenuItem onClick={() => onClickMenuItem(filter)}>
       <Flex alignItems="center" cursor="pointer" className="">
         <Box w={4} h={5}>
           {selected ? <Icon as={FaCheck} w={3} h={3} /> : null}

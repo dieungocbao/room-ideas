@@ -24,7 +24,7 @@ const MainMenu: React.FC<{}> = () => {
   } = useStore()
   return (
     <Box ml={2}>
-      <Menu isLazy id="navbar-menu">
+      <Menu isLazy id="navbar-menu" closeOnSelect={false}>
         <MenuButton
           as={IconButton}
           _focus={{ boxShadow: "none" }}
@@ -32,7 +32,7 @@ const MainMenu: React.FC<{}> = () => {
           variant="none"
           aria-label="Options"
         />
-        <MenuList>
+        <MenuList zIndex={9}>
           <MenuGroup title="Filter">
             {query_strings.map((item) => (
               <MenuSelectItem

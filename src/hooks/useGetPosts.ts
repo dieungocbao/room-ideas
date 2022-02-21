@@ -5,10 +5,10 @@ import { useQuery } from "react-query"
 const fetchPosts = async (
   subReddits: string[],
   filter: string,
-  after: string
+  after: string = ""
 ) => {
   const res = await fetch(
-    `hhttps://www.reddit.com/r/${subReddits.join(
+    `https://www.reddit.com/r/${subReddits.join(
       "+"
     )}/${filter}.json?raw_json=1&after=${after}&limit=15`
   )

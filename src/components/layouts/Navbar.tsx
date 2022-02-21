@@ -19,7 +19,7 @@ const Navbar: React.FC<NavbarProps> = ({}) => {
       bg={useColorModeValue("#FFFFFF", "#202023")}
       style={{ backdropFilter: "blur(10px)" }}
     >
-      <Container p={2} maxW="container.lg">
+      <Container p={2} maxW="1280">
         <Flex alignItems="center" justifyContent="space-between">
           <Heading as="h1" size="lg" letterSpacing="tighter">
             Rocore

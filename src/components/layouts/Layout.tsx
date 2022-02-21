@@ -11,7 +11,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
     <Box>
       <Header />
-      <Container maxW="container.lg" pt={16}>
+      <Container maxW="1280" py={16}>
         {children}
       </Container>
       <Footer />
