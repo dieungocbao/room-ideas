@@ -1,8 +1,14 @@
-import React from 'react'
+import React from "react"
+import { Box } from "@chakra-ui/react"
+import Navbar from "./Navbar"
 
-const Header = () => {
+interface HeaderProps {}
+
+const Header: React.FC<HeaderProps> = () => {
   return (
-    <div>Header</div>
+    <Box>
+      <Navbar />
+    </Box>
   )
 }
 

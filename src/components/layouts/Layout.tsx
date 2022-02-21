@@ -1,6 +1,7 @@
 import React from "react"
 import { Box, Container } from "@chakra-ui/react"
-import Navbar from "../sections/Navbar"
+import Footer from "../sections/Footer"
+import Header from "../sections/Header"
 
 interface LayoutProps {
   children: React.ReactChild
@@ -9,10 +10,11 @@ interface LayoutProps {
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
     <Box>
-      <Navbar />
+      <Header />
       <Container maxW="container.md" pt={16}>
         {children}
       </Container>
+      <Footer />
     </Box>
   )
 }

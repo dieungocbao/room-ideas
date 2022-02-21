@@ -38,7 +38,7 @@ const Navbar: React.FC<NavbarProps> = ({}) => {
       <Container p={2} maxW="container.md">
         <Flex alignItems="center" justifyContent="space-between">
           <Heading as="h1" size="lg" letterSpacing="tighter">
-            Room Ideas
+            Rocore
           </Heading>
           {/* <ThemeToggleButton /> */}
 
