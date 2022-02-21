@@ -1,4 +1,5 @@
 import { ChakraProvider } from "@chakra-ui/react"
+import { QueryClient, QueryClientProvider } from "react-query"
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import Layout from "./components/layouts/Layout"
 import Fonts from "./libs/fonts"
@@ -6,16 +7,19 @@ import theme from "./libs/theme"
 import Home from "./pages"
 
 export default function App() {
+  const queryClient = new QueryClient()
   return (
     <ChakraProvider theme={theme}>
-      <Fonts />
-      <Layout>
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Home />} />
-          </Routes>
-        </BrowserRouter>
-      </Layout>
+      <QueryClientProvider client={queryClient}>
+        <Fonts />
+        <Layout>
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<Home />} />
+            </Routes>
+          </BrowserRouter>
+        </Layout>
+      </QueryClientProvider>
     </ChakraProvider>
   )
 }

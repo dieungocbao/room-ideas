@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React from "react"
 import {
   Box,
   Icon,
@@ -9,24 +9,19 @@ import {
   MenuList,
 } from "@chakra-ui/react"
 import { FaSlidersH } from "react-icons/fa"
-import MenuSelectItem from "./MenuSelectItem"
+import MenuSelectItem from "./layouts/MenuSelectItem"
 import ThemeToggleButton from "./ThemeToggleButton"
+import { subRedditList, useStore } from "../store"
 
 const query_strings = ["Hot", "New", "Top"]
 
-const subRedditList = [
-  "r/battlestations",
-  "r/gamingsetups",
-  "r/macsetups",
-  "r/setups",
-  "r/desksetup",
-  "r/Minimal_Setups",
-]
-
 const MainMenu: React.FC<{}> = () => {
-  const [filterString, setFilterString] = useState<string>(query_strings[0])
-  const [subReddits, setSubReddits] = useState<string[]>(subRedditList)
-  console.log(subRedditList)
+  const {
+    filterString,
+    handleChooseFilterString,
+    subReddits,
+    handleChooseSubReddits,
+  } = useStore()
   return (
     <Box ml={2}>
       <Menu isLazy id="navbar-menu">
@@ -43,7 +38,7 @@ const MainMenu: React.FC<{}> = () => {
               <MenuSelectItem
                 key={item}
                 filterString={filterString}
-                onClickMenuItem={(filter) => setFilterString(filter)}
+                onClickMenuItem={handleChooseFilterString}
               >
                 {item}
               </MenuSelectItem>
@@ -54,14 +49,7 @@ const MainMenu: React.FC<{}> = () => {
               <MenuSelectItem
                 key={item}
                 subReddits={subReddits}
-                onClickMenuItem={(value) =>
-                  setSubReddits((prevState) => {
-                    if (!prevState.includes(value)) {
-                      return [...prevState, value]
-                    }
-                    return prevState.filter((x) => x !== value)
-                  })
-                }
+                onClickMenuItem={handleChooseSubReddits}
               >
                 {item}
               </MenuSelectItem>

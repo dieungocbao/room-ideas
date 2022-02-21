@@ -6,7 +6,7 @@ import {
   Heading,
   useColorModeValue,
 } from "@chakra-ui/react"
-import MainMenu from "./MainMenu"
+import MainMenu from "../MainMenu"
 
 interface NavbarProps {}
 

@@ -2,7 +2,7 @@ import React from "react"
 import { Box, Flex, Icon, MenuItem } from "@chakra-ui/react"
 import { FaCheck } from "react-icons/fa"
 interface MenuItemProps {
-  children: React.ReactChildren | string
+  children: string
   filterString?: string
   subReddits?: string[]
   onClickMenuItem: (filter: string) => void
@@ -14,7 +14,7 @@ const MenuSelectItem: React.FC<MenuItemProps> = ({
   subReddits,
   onClickMenuItem,
 }) => {
-  const filter: string = children as string
+  const filter = children.toLowerCase()
   let selected = false
   if (filterString) {
     selected = filterString === filter
@@ -27,7 +27,7 @@ const MenuSelectItem: React.FC<MenuItemProps> = ({
         <Box w={4} h={5}>
           {selected ? <Icon as={FaCheck} w={3} h={3} /> : null}
         </Box>
-        <Box ml={3}>{children}</Box>
+        <Box ml={3}>{filterString ? children : `r/${children}`}</Box>
       </Flex>
     </MenuItem>
   )
