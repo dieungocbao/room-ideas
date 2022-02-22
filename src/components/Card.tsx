@@ -80,27 +80,24 @@ const Card: React.FC<CardProps> = ({
         />
       </Box>
 
-      <Box p={2}>
+      <Box p={3}>
         <Box
-          fontWeight="light"
+          fontWeight="500"
           fontSize="0.9rem"
           letterSpacing="0.02rem"
           mb="2px"
+          isTruncated
         >
           {title}
         </Box>
-        <Box
-          display="flex"
-          alignItems="center"
-          justifyContent="space-between"
-          fontWeight="thin"
-        >
+        <Box display="flex" alignItems="center" justifyContent="space-between">
           <Box display="flex" fontSize="0.7rem" letterSpacing="0.03rem">
             Posted by{" "}
-            <Box ml={1} fontWeight="500">
+            <Box ml={1}>
               <Link
                 href={`https://www.reddit.com/user/${author}`}
                 target="_blank"
+                fontWeight="500"
               >
                 {" "}
                 u/{author}

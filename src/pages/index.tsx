@@ -32,7 +32,7 @@ const Home = () => {
       gap="1.25rem"
       mt="1.5rem"
     >
-      {data?.data.children.map(({ data }) => (
+      {data?.data.children.map(({ data }: { data: any }) => (
         <Card key={data.url} {...data} />
       ))}
     </Grid>

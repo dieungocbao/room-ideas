@@ -7,6 +7,7 @@ import {
   MenuButton,
   MenuGroup,
   MenuList,
+  useColorModeValue,
 } from "@chakra-ui/react"
 import { FaSlidersH } from "react-icons/fa"
 import MenuSelectItem from "./layouts/MenuSelectItem"
@@ -27,6 +28,12 @@ const MainMenu: React.FC<{}> = () => {
       <Menu isLazy id="navbar-menu" closeOnSelect={false}>
         <MenuButton
           as={IconButton}
+          _hover={{
+            backgroundColor: useColorModeValue(
+              "#EDF2F7",
+              "rgba(255, 255, 255, 0.08)"
+            ),
+          }}
           _focus={{ boxShadow: "none" }}
           icon={<Icon as={FaSlidersH} />}
           variant="none"
