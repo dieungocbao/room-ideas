@@ -1,4 +1,4 @@
-import { Box, Container, Flex, Grid } from "@chakra-ui/react"
+import { Box, Grid, Spinner } from "@chakra-ui/react"
 import Card from "../components/Card"
 import { useGetPosts } from "../hooks/useGetPosts"
 import { useStore } from "../store"
@@ -7,7 +7,14 @@ const Home = () => {
   const { filterString, subReddits } = useStore()
   const { isLoading, data } = useGetPosts(subReddits, filterString, "")
 
-  // console.log(data)
+  console.log(data)
+  if (isLoading) {
+    return (
+      <Box width="100%" height="100%" display='flex' justifyContent="center" alignItems="center">
+        <Spinner w="80px" height='80px' speed="0.75s"/>
+      </Box>
+    )
+  }
 
   return (
     <Grid
@@ -16,14 +23,12 @@ const Home = () => {
         md: "repeat(2, 1fr)",
         lg: "repeat(3, 1fr)",
       }}
-      gap='1.25rem'
-      mt='1.5rem'
+      gap="1.25rem"
+      mt="1.5rem"
     >
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
+      {data?.data.children.map(({ data }) => (
+        <Card key={data.url} {...data} />
+      ))}
     </Grid>
   )
 }

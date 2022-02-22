@@ -18,6 +18,7 @@ const Navbar: React.FC<NavbarProps> = ({}) => {
       w="100%"
       bg={useColorModeValue("#FFFFFF", "#202023")}
       style={{ backdropFilter: "blur(10px)" }}
+      zIndex={9}
     >
       <Container p={2} maxW="1280">
         <Flex alignItems="center" justifyContent="space-between">
