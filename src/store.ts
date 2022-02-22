@@ -28,6 +28,9 @@ export const useStore = create<PostState>((set) => ({
       if (!state.subReddits.includes(subReddit)) {
         return { ...state, subReddits: [...state.subReddits, subReddit] }
       }
+      if (state.subReddits.length <= 1) {
+        return
+      }
       return {
         ...state,
         subReddits: state.subReddits.filter((sub) => sub !== subReddit),

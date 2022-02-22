@@ -56,7 +56,13 @@ const Card: React.FC<CardProps> = ({
     ? media_metadata[Object.keys(media_metadata)[0]].p[4].u
     : undefined
 
-  const previewImage = preview?.images[0].resolutions[3].url
+  const previewImage =
+    preview?.images[0]?.resolutions[
+      preview?.images[0]?.resolutions?.length > 3 ? 3 : 2
+    ]?.url
+  if (!metaImg && !previewImage) {
+    return null
+  }
   return (
     <GridItem
       bg={useColorModeValue("rgb(237, 242, 247)", "rgb(45, 55, 72)")}
