@@ -10,8 +10,14 @@ const Home = () => {
   console.log(data)
   if (isLoading) {
     return (
-      <Box width="100%" height="100%" display='flex' justifyContent="center" alignItems="center">
-        <Spinner w="80px" height='80px' speed="0.75s"/>
+      <Box
+        flex={1}
+        width="100%"
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
+      >
+        <Spinner w="80px" height="80px" speed="0.75s" />
       </Box>
     )
   }

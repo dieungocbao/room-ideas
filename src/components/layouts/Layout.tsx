@@ -9,9 +9,9 @@ interface LayoutProps {
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
-    <Box>
+    <Box flex={1} display="flex" flexDir="column">
       <Header />
-      <Container maxW="1280" py={16}>
+      <Container maxW="1280" py={16} minH="inherit" flex={1} display="flex">
         {children}
       </Container>
       <Footer />
