@@ -1,13 +1,17 @@
+import React, { useEffect } from "react"
 import { Box, Grid, Spinner } from "@chakra-ui/react"
 import Card from "../components/Card"
 import { useGetPosts } from "../hooks/useGetPosts"
 import { useStore } from "../store"
 
-const Home = () => {
+const Home: React.FC<{}> = () => {
   const { filterString, subReddits } = useStore()
-  const { isLoading, data } = useGetPosts(subReddits, filterString, "")
+  const { isLoading, data, refetch } = useGetPosts(subReddits, filterString, "")
 
-  console.log(data)
+  useEffect(() => {
+    refetch()
+  }, [filterString, subReddits])
+
   if (isLoading) {
     return (
       <Box
