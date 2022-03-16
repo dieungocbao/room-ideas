@@ -1,15 +1,15 @@
-import { useQuery } from "react-query"
+import { useQuery } from 'react-query'
 
 // https://www.reddit.com/r/battlestations+gamingsetups+macsetups+setups+desksetup+Minimal_Setups/hot.json?raw_json=1&limit=15
 
 const fetchPosts = async (
   subReddits: string[],
   filter: string,
-  after: string = ""
+  after: string = ''
 ) => {
   const res = await fetch(
     `https://www.reddit.com/r/${subReddits.join(
-      "+"
+      '+'
     )}/${filter}.json?raw_json=1&after=${after}&limit=15`
   )
   return res.json()
@@ -18,7 +18,13 @@ const fetchPosts = async (
 export const useGetPosts = (
   subReddits: string[],
   filter: string,
-  after: string
+  after: string | undefined
 ) => {
-  return useQuery("posts", () => fetchPosts(subReddits, filter, after))
+  return useQuery(
+    ['posts', subReddits, filter, after],
+    () => fetchPosts(subReddits, filter, after),
+    {
+      keepPreviousData: true
+    }
+  )
 }

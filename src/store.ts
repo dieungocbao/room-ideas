@@ -14,6 +14,8 @@ interface PostState {
   handleChooseFilterString: (filter: string) => void
   subReddits: string[]
   handleChooseSubReddits: (subReddit: string) => void
+  afterFetch: string | undefined
+  setAfterFetch: (after: string | undefined) => void
 }
 
 export const useStore = create<PostState>((set) => ({
@@ -36,4 +38,7 @@ export const useStore = create<PostState>((set) => ({
         subReddits: state.subReddits.filter((sub) => sub !== subReddit),
       }
     }),
+
+  afterFetch: '',
+  setAfterFetch: (after) => set((state) => ({ ...state, afterFetch: after })),
 }))

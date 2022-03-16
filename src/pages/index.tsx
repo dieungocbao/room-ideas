@@ -1,61 +1,74 @@
-import React, { useEffect } from "react"
-import { Grid, Skeleton } from "@chakra-ui/react"
-import Card from "../components/Card"
-import { useGetPosts } from "../hooks/useGetPosts"
-import { useStore } from "../store"
+import React, { useEffect } from 'react'
+import { Box, Button, Grid, Skeleton } from '@chakra-ui/react'
+import Card from '../components/Card'
+import { useGetPosts } from '../hooks/useGetPosts'
+import { useStore } from '../store'
+import { BsArrowRepeat } from 'react-icons/bs'
 
 const Home: React.FC<{}> = () => {
-  const { filterString, subReddits } = useStore()
-  const { isLoading, data, refetch, isFetching } = useGetPosts(
-    subReddits,
-    filterString,
-    ""
-  )
+  const listSkeleton = Array.from(Array(9).keys())
+  const { filterString, subReddits, setAfterFetch, afterFetch } = useStore()
+  const { isLoading, data } = useGetPosts(subReddits, filterString, afterFetch)
 
-  useEffect(() => {
-    refetch()
-  }, [filterString, subReddits])
+  const changeAfterFetch = (after: string | undefined) => {
+    setAfterFetch(after)
+  }
 
-  if (isLoading || isFetching) {
+  const nextPage = data?.data.after
+
+  if (isLoading) {
     return (
       <Grid
         templateColumns={{
-          base: "repeat(1, 1fr)",
-          md: "repeat(2, 1fr)",
-          lg: "repeat(3, 1fr)",
+          base: 'repeat(1, 1fr)',
+          md: 'repeat(2, 1fr)',
+          lg: 'repeat(3, 1fr)'
         }}
-        gap="1.25rem"
-        mt="1.5rem"
+        gap='1.25rem'
+        mt='1.5rem'
       >
-        {Array.from(Array(9).keys()).map((item) => (
-          <>
+        {listSkeleton.map((item) => {
+          return (
             <Skeleton
               key={item}
               height={275}
-              borderRadius="0.375rem"
-              userSelect="none"
-              pointerEvents="none"
+              borderRadius='0.375rem'
+              userSelect='none'
+              pointerEvents='none'
             />
-          </>
-        ))}
+          )
+        })}
       </Grid>
     )
   }
 
   return (
-    <Grid
-      templateColumns={{
-        base: "repeat(1, 1fr)",
-        md: "repeat(2, 1fr)",
-        lg: "repeat(3, 1fr)",
-      }}
-      gap="1.25rem"
-      mt="1.5rem"
-    >
-      {data?.data.children.map(({ data }: { data: any }) => (
-        <Card key={data.url} {...data} />
-      ))}
-    </Grid>
+    <>
+      <Grid
+        templateColumns={{
+          base: 'repeat(1, 1fr)',
+          md: 'repeat(2, 1fr)',
+          lg: 'repeat(3, 1fr)'
+        }}
+        gap='1.25rem'
+        mt='1.5rem'
+      >
+        {data?.data.children.map(({ data }: { data: any }) => {
+          return <Card key={data.id} {...data} />
+        })}
+      </Grid>
+      {data?.data.after && (
+        <Box textAlign='center' mt={'2rem'}>
+          <Button
+            leftIcon={<BsArrowRepeat />}
+            variant='solid'
+            onClick={() => changeAfterFetch(nextPage)}
+          >
+            Load more
+          </Button>
+        </Box>
+      )}
+    </>
   )
 }
 

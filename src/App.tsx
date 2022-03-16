@@ -1,6 +1,7 @@
 import { ChakraProvider } from "@chakra-ui/react"
 import { QueryClient, QueryClientProvider } from "react-query"
 import { BrowserRouter, Routes, Route } from "react-router-dom"
+import {ReactQueryDevtools} from 'react-query/devtools'
 import Layout from "./components/layouts/Layout"
 import Fonts from "./libs/fonts"
 import theme from "./libs/theme"
@@ -19,6 +20,7 @@ export default function App() {
             </Routes>
           </BrowserRouter>
         </Layout>
+        <ReactQueryDevtools position="bottom-right"/>
       </QueryClientProvider>
     </ChakraProvider>
   )
