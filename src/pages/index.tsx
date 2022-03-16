@@ -1,17 +1,20 @@
-import React from 'react'
-import { Box, Button, Grid, Skeleton } from '@chakra-ui/react'
+import React, { useState } from 'react'
+import { Box, Button, Grid, Skeleton, useDisclosure } from '@chakra-ui/react'
 import Card from '../components/Card'
 import { useGetPosts } from '../hooks/useGetPosts'
 import { useStore } from '../store'
 import { BsArrowRepeat } from 'react-icons/bs'
+import PreviewImage from '../components/PreviewImage'
 
 const Home: React.FC<{}> = () => {
+  const { isOpen, onOpen, onClose } = useDisclosure()
   const listSkeleton = Array.from(Array(15).keys())
-  const { filterString, subReddits, setAfterFetch, afterFetch } = useStore()
+  const { filterString, subReddits } = useStore()
+  const [selectedPost, setSelectedPost] = useState(null)
   const { isLoading, data, fetchNextPage, isFetchingNextPage } = useGetPosts(
     subReddits,
     filterString,
-    afterFetch
+    ''
   )
 
   if (isLoading) {
@@ -40,6 +43,10 @@ const Home: React.FC<{}> = () => {
     )
   }
 
+  const view = (post: any) => {
+    setSelectedPost(post)
+    onOpen()
+  }
   return (
     <>
       <Grid
@@ -53,7 +60,7 @@ const Home: React.FC<{}> = () => {
       >
         {data?.pages.map((page) => {
           return page.data.children.map(({ data }: { data: any }) => {
-            return <Card key={data.id} {...data} />
+            return <Card key={data.id} post={data} onImageClick={view} />
           })
         })}
 
@@ -70,6 +77,9 @@ const Home: React.FC<{}> = () => {
             )
           })}
       </Grid>
+      {selectedPost && (
+        <PreviewImage isOpen={isOpen} onClose={onClose} post={selectedPost} />
+      )}
       <Box textAlign='center' mt={'2rem'}>
         <Button
           leftIcon={<BsArrowRepeat />}

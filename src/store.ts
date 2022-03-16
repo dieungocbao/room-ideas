@@ -1,12 +1,12 @@
-import create from "zustand"
+import create from 'zustand'
 
 export const subRedditList = [
-  "battlestations",
-  "gamingsetups",
-  "macsetups",
-  "setups",
-  "desksetup",
-  "Minimal_Setups",
+  'battlestations',
+  'gamingsetups',
+  'macsetups',
+  'setups',
+  'desksetup',
+  'Minimal_Setups'
 ]
 
 interface PostState {
@@ -14,12 +14,10 @@ interface PostState {
   handleChooseFilterString: (filter: string) => void
   subReddits: string[]
   handleChooseSubReddits: (subReddit: string) => void
-  afterFetch: string | undefined
-  setAfterFetch: (after: string | undefined) => void
 }
 
 export const useStore = create<PostState>((set) => ({
-  filterString: "hot",
+  filterString: 'hot',
   handleChooseFilterString: (filter) => {
     set((state) => ({ ...state, filterString: filter }))
   },
@@ -35,10 +33,7 @@ export const useStore = create<PostState>((set) => ({
       }
       return {
         ...state,
-        subReddits: state.subReddits.filter((sub) => sub !== subReddit),
+        subReddits: state.subReddits.filter((sub) => sub !== subReddit)
       }
-    }),
-
-  afterFetch: '',
-  setAfterFetch: (after) => set((state) => ({ ...state, afterFetch: after })),
+    })
 }))
